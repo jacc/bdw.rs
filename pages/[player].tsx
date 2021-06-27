@@ -47,13 +47,14 @@ export default function Post({ playerData, status }: Props) {
 
       <main>
         <div>
-          <h1 className="text-left pt-4 text-xl pb-4 dark:text-white">
-            stats for {playerData.displayname} (currently{" "}
-            {status.online ? "online" : "offline"})
+          <h1 className="text-left font-bold pt-4 text-xl pb-4 dark:text-white">
+            stats for {playerData.displayname} (
+            {playerData.achievements.bedwars_level} ✰)
           </h1>
+          {/* <h2 className="text-left pb-4">currently playing x</h2> */}
         </div>
         <div>
-          <br></br>
+          <h1 className="text-left font-normal text-lg pb-2">Overall Stats</h1>
           <ToolLink title="Total Kills" description={bedwars.kills_bedwars} />
           <ToolLink title="Total Deaths" description={bedwars.deaths_bedwars} />
           <ToolLink
