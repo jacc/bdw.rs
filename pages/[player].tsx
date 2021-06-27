@@ -7,7 +7,7 @@ import MainLayout from "../layouts/main";
 const hypixel = new HypixelAPI(process.env.HYPIXEL!);
 
 interface Props {
-  playerData: Player;
+  playerData: Player | any;
   status: any;
 }
 
@@ -47,10 +47,17 @@ export default function Post({ playerData, status }: Props) {
 
       <main>
         <div>
-          <h1 className="text-left font-bold pt-4 text-xl pb-4 dark:text-white">
-            stats for {playerData.displayname} (
-            {playerData.achievements.bedwars_level} ✰) (network level {convertNetworkExp(playerData.networkExp)})
+          <h1 className="text-left font-bold pt-4 text-xl dark:text-white">
+            {convertNetworkRank(
+              playerData.newPackageRank,
+              playerData.monthlyPackageRank
+            )}{" "}
+            {playerData.displayname}
           </h1>
+          <h2 className="text-left font-normal pb-4 text-lg">
+            {playerData.achievements.bedwars_level} ✰ • Level{" "}
+            {convertNetworkExp(playerData.networkExp)}
+          </h2>
           {/* <h2 className="text-left pb-4">currently playing x</h2> */}
         </div>
         <div>
@@ -91,12 +98,36 @@ function ToolLink(props: { title: string; description: string }) {
 }
 
 export function convertNetworkExp(exp: number) {
-  const BASE = 10_000
-const GROWTH = 2_500
+  const BASE = 10_000;
+  const GROWTH = 2_500;
 
-const REVERSE_PQ_PREFIX = -(BASE - 0.5 * GROWTH) / GROWTH;
-const REVERSE_CONST = REVERSE_PQ_PREFIX * REVERSE_PQ_PREFIX;
-const GROWTH_DIVIDES_2 = 2 / GROWTH;
+  const REVERSE_PQ_PREFIX = -(BASE - 0.5 * GROWTH) / GROWTH;
+  const REVERSE_CONST = REVERSE_PQ_PREFIX * REVERSE_PQ_PREFIX;
+  const GROWTH_DIVIDES_2 = 2 / GROWTH;
 
-    return exp < 0 ? 1 : Math.floor(1 + REVERSE_PQ_PREFIX + Math.sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp));
+  return exp < 0
+    ? 1
+    : Math.floor(
+        1 +
+          REVERSE_PQ_PREFIX +
+          Math.sqrt(REVERSE_CONST + GROWTH_DIVIDES_2 * exp)
+      );
+}
+
+export function convertNetworkRank(
+  packageRank: string,
+  monthlyPackageRank: string
+) {
+  const RANKS: Record<string, string> = {
+    VIP: "VIP",
+    VIP_PLUS: "VIP_PLUS",
+    MVP: "MVP",
+    MVP_PLUS: "MVP+",
+  };
+
+  if (monthlyPackageRank !== "NONE") {
+    return "[MVP++]";
+  } else {
+    return `[${RANKS[packageRank]}]`;
+  }
 }
