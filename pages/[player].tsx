@@ -34,6 +34,8 @@ export default function Post({ playerData, status }: Props) {
     }
   );
 
+  let bedwars = playerData.stats["Bedwars"];
+
   return (
     <MainLayout>
       <Head>
@@ -51,7 +53,19 @@ export default function Post({ playerData, status }: Props) {
           </h1>
         </div>
         <div>
-          <ToolLink title=" " description="bruh" />
+          <ToolLink title="Stars" description={bedwars.stars} />
+
+          <br></br>
+          <ToolLink title="Total Kills" description={bedwars.kills_bedwars} />
+          <ToolLink title="Total Deaths" description={bedwars.deaths_bedwars} />
+          <ToolLink
+            title="K/D Ratio"
+            description={
+              Number(
+                bedwars.kills_bedwars / bedwars.deaths_bedwars
+              ) as unknown as string
+            }
+          />
         </div>
       </main>
     </MainLayout>
