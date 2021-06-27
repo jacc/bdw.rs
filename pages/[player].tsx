@@ -125,7 +125,9 @@ export function convertNetworkRank(
     MVP_PLUS: "MVP+",
   };
 
-  if (monthlyPackageRank !== "NONE") {
+  if (packageRank == null) {
+    return " ";
+  } else if (monthlyPackageRank !== "NONE" && packageRank !== "NONE") {
     return "[MVP++]";
   } else {
     return `[${RANKS[packageRank]}]`;
