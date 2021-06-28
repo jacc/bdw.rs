@@ -6,9 +6,9 @@ import Link from "next/link";
 export class Header extends React.Component {
   render() {
     return (
-      <header className="text-gray-600 body-font">
+      <header className="text-gray-200 body-font">
         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-          <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          <a className="flex title-font font-medium items-center text-gray-200 mb-4 md:mb-0">
             <Image src={logo} alt="logo" width="50" height="60" />
             <Link href="/">
               <a className="ml-3 text-xl">bdw.rs</a>

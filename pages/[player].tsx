@@ -47,23 +47,33 @@ const PlayerPage: React.FC<Props> = ({ playerData, status }) => {
 
       <main>
         <div>
-          <h1 className='text-left font-bold pt-4 text-xl dark:text-white'>
+          <h1 className='text-left font-bold pt-4 text-xl text-gray-200'>
             {convertNetworkRank(
               playerData.newPackageRank,
               playerData.monthlyPackageRank
             )}{' '}
             {playerData.displayname}
           </h1>
-          <h2 className='text-left font-normal pb-4 text-lg'>
+          <h2 className='text-left font-normal pb-4 text-lg text-gray-200'>
             {playerData.achievements.bedwars_level} ✰ • Level{' '}
             {convertNetworkExp(playerData.networkExp)}
           </h2>
           {/* <h2 className='text-left pb-4'>currently playing x</h2> */}
         </div>
         <div>
-          <h1 className='text-left font-normal text-lg pb-2'>Overall Stats</h1>
-          <StatsBox title='Total Kills' description={bedwars.kills_bedwars} />
-          <StatsBox title='Total Deaths' description={bedwars.deaths_bedwars} />
+          <h1 className='text-left font-normal text-lg pb-2 text-gray-200'>Overall Stats</h1>
+          <StatsBox 
+            title='Total Kills' 
+            description={bedwars.kills_bedwars} 
+            background='blue-200'
+            color='blue-600'
+          />
+          <StatsBox 
+            title='Total Deaths' 
+            description={bedwars.deaths_bedwars} 
+            background='red-200'
+            color='red-600'
+            />
           <StatsBox
             title='K/D Ratio'
             description={
@@ -71,6 +81,8 @@ const PlayerPage: React.FC<Props> = ({ playerData, status }) => {
                 Number(bedwars.kills_bedwars / bedwars.deaths_bedwars) * 100
               ) / 100) as unknown as string
             }
+            background='green-200'
+            color='green-600'
           />
         </div>
       </main>
