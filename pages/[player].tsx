@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Player } from 'hypixel-api-v2';
 import React from 'react';
-import { Header, ToolLink } from '../components';
+import { Header, StatsBox } from '../components';
 import MainLayout from '../layouts/main';
 import { hypixel } from '../utils/hypixel';
 import { convertNetworkRank, convertNetworkExp } from '../utils/convert';
@@ -62,9 +62,9 @@ const PlayerPage: React.FC<Props> = ({ playerData, status }) => {
         </div>
         <div>
           <h1 className='text-left font-normal text-lg pb-2'>Overall Stats</h1>
-          <ToolLink title='Total Kills' description={bedwars.kills_bedwars} />
-          <ToolLink title='Total Deaths' description={bedwars.deaths_bedwars} />
-          <ToolLink
+          <StatsBox title='Total Kills' description={bedwars.kills_bedwars} />
+          <StatsBox title='Total Deaths' description={bedwars.deaths_bedwars} />
+          <StatsBox
             title='K/D Ratio'
             description={
               (Math.floor(
